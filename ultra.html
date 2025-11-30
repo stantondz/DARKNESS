@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secure Services</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
+
+body { 
+    margin:0; 
+    font-family: 'Orbitron', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background:#0d0d0d; 
+    color:#fff; 
+    overflow-x:hidden; 
+    font-weight: 600;
+}
+
+
+p, #welcomeMsg span.red {
+    margin-bottom: 12px;
+    line-height: 1.5;
+    color:#ff0000;
+    text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000;
+}
+
+
+h1, h2 {
+    text-align:center;
+    font-weight:bold;
+}
+
+
+#welcome h1 {
+    color:#ffff00;
+    text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00, 0 0 20px #ffff00;
+}
+
+
+#welcome {
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:20px;
+    background:#0d0d0d;
+}
+#welcome button {
+    margin-top:25px;
+    padding:12px 25px;
+    background:#ff0000;
+    border:none;
+    border-radius:8px;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+    transition: 0.3s;
+}
+#welcome button:hover {
+    box-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000;
+}
+
+
+#main {
+    display:none;
+    padding:20px;
+    background-image: url('https://images.pexels.com/photos/2230895/pexels-photo-2230895.jpeg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+}
+
+
+#menuIcon {
+    font-size:32px;
+    cursor:pointer;
+    margin-bottom:20px;
+    display:inline-block;
+    background: rgba(0,0,0,0.6);
+    padding:6px 12px;
+    border-radius:6px;
+    color:#ff0000;
+    text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000;
+}
+
+
+#sidebar {
+    position:fixed;
+    top:0;
+    left:-250px;
+    width:250px;
+    height:100%;
+    background:#111;
+    padding-top:60px;
+    transition:0.3s;
+    z-index: 1000;
+    box-shadow: 2px 0 10px #ff0000;
+}
+#sidebar a {
+    display:block;
+    padding:15px;
+    color:#ff0000;
+    font-weight:bold;
+    text-decoration:none;
+    border-bottom:1px solid #222;
+    text-shadow: 0 0 5px #ff0000;
+    transition:0.3s;
+}
+#sidebar a:hover { 
+    background:#ff0000; 
+    color:#fff;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff;
+}
+
+
+.section {
+    display:none;
+    margin-top:20px;
+}
+
+
+#welcomeMsg {
+    font-size:18px;
+    background: rgba(0,0,0,0.6);
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:20px;
+    text-align:center;
+    font-weight: 600;
+}
+#welcomeMsg span.blue {
+    color:#00f;
+    text-shadow: 0 0 5px #00f, 0 0 10px #00f, 0 0 20px #00f;
+}
+#welcomeMsg span.red {
+    color:#ff0000;
+    text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000;
+}
+
+
+.service-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,0,0,0.5);
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+    transition: 0.3s;
+}
+.service-card:hover {
+    box-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000;
+}
+.service-name {
+    font-weight: 600;
+    color: #fff;
+}
+.service-price {
+    background: #ff0000;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000;
+}
+
+
+.contact-btn {
+    display:block;
+    margin:20px auto; 
+    padding:10px 20px;
+    background:#ff0000;
+    color:#fff;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+    text-align:center;
+    width:150px;
+    box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+    transition:0.3s;
+}
+.contact-btn:hover {
+    box-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000;
+}
+
+</style>
+</head>
+<body>
+
+
+<div id="welcome">
+    <h1>Hello User!</h1>
+    <p>Please follow the instructions. All services here are confidential and cannot be shared, reused, or sold. Use responsibly. You bear full consequences.</p>
+    <button onclick="continueSite()">Continue</button>
+</div>
+
+
+<div id="sidebar">
+    <a href="#" onclick="showSection('VISA')">Visa Services</a>
+    <a href="#" onclick="showSection('ACCOUNTS')">Accounts Shop</a>
+    <a href="#" onclick="showSection('COURSES')">Courses</a>
+    <a href="#" onclick="showSection('SCRIPTS')">Scripts & Bots</a>
+    <a href="#" onclick="showSection('CONTACT')">Contact</a>
+</div>
+
+
+<div id="main">
+    <span id="menuIcon" onclick="toggleSidebar()">☰</span>
+
+    <div id="welcomeMsg">
+        <span class="blue">[ WE ARE THE MASTERS ]</span><br>
+        <span class="red">AFTER YOU CHOOSE THE PRODUCT YOU WANT GO TO CONTACT AND MESSAGE US ON TELEGRAM</span>
+    </div>
+
+   
+    <div id="VISA" class="section">
+        <h2>VISA SERVICES</h2>
+        <div class="service-card"><span class="service-name">30$ VISA</span><span class="service-price">$5</span></div>
+        <div class="service-card"><span class="service-name">$75 VISA</span><span class="service-price">$9</span></div>
+        <div class="service-card"><span class="service-name">$100 VISA</span><span class="service-price">$25</span></div>
+        <div class="service-card"><span class="service-name">$280 VISA</span><span class="service-price">$40</span></div>
+        <div class="service-card"><span class="service-name">$500 VISA</span><span class="service-price">$70</span></div>
+        <div class="service-card"><span class="service-name">flash usdt</span><span class="service-price">$8</span></div>
+    </div>
+
+
+    <div id="ACCOUNTS" class="section">
+        <h2>ACCOUNTS SHOP</h2>
+        <div class="service-card"><span class="service-name">Netflix / 1 MONTH</span><span class="service-price">$2</span></div>
+        <div class="service-card"><span class="service-name">Netflix / 3 MONTH</span><span class="service-price">$4</span></div>
+        <div class="service-card"><span class="service-name">Netflix / 1 YEAR</span><span class="service-price">$10</span></div>
+        <div class="service-card"><span class="service-name">chat gpt / 1 MONTH</span><span class="service-price">$3</span></div>
+        <div class="service-card"><span class="service-name">chat gpt / 3 MONTH</span><span class="service-price">$5</span></div>
+        <div class="service-card"><span class="service-name">spotify / 1 MONTH</span><span class="service-price">$2</span></div>
+        <div class="service-card"><span class="service-name">spotify / 3 MONTH</span><span class="service-price">$4</span></div>
+        <div class="service-card"><span class="service-name">worm gpt lite</span><span class="service-price">$2</span></div>
+        <div class="service-card"><span class="service-name">worm gpt normal</span><span class="service-price">$4</span></div>
+        <div class="service-card"><span class="service-name">worm gpt pro</span><span class="service-price">$7</span></div>
+        <div class="service-card"><span class="service-name">worm gpt ultra</span><span class="service-price">$15</span></div>
+        <div class="service-card"><span class="service-name">rdp/vps / 4gb ram</span><span class="service-price">$2</span></div>
+        <div class="service-card"><span class="service-name">rdp/vps / 8gb ram</span><span class="service-price">$4</span></div>
+        <div class="service-card"><span class="service-name">rdp/vps / 16gb ram</span><span class="service-price">$6</span></div>
+        <div class="service-card"><span class="service-name">rdp/vps / 32gb ram</span><span class="service-price">$13</span></div>
+    </div>
+
+    <!-- Courses Section -->
+    <div id="COURSES" class="section">
+        <h2>COURSES</h2>
+        <div class="service-card"><span class="service-name">kali Linux and tools full course</span><span class="service-price">$3</span></div>
+        <div class="service-card"><span class="service-name">networking course</span><span class="service-price">$3</span></div>
+        <div class="service-card"><span class="service-name">Python hacking course</span><span class="service-price">$4</span></div>
+        <div class="service-card"><span class="service-name">game hacking course</span><span class="service-price">$5</span></div>
+        <div class="service-card"><span class="service-name">How to get a hacker mindset</span><span class="service-price">$2</span></div>
+        <div class="service-card"><span class="service-name">web hacking course</span><span class="service-price">$4</span></div>
+    </div>
+
+    <!-- Scripts Section -->
+    <div id="SCRIPTS" class="section">
+        <h2>Scripts & Bots</h2>
+        <div class="service-card"><span class="service-name">Telegram Bots</span><span class="service-price">$3</span></div>
+        <div class="service-card"><span class="service-name">ddos scripts</span><span class="service-price">$3</span></div>
+        <div class="service-card"><span class="service-name">Various hacking scripts</span><span class="service-price">$6</span></div>
+        <div class="service-card"><span class="service-name">clean rats for pc and mobile</span><span class="service-price">$4</span></div>
+        <div class="service-card"><span class="service-name">otp scripts Whatsapp</span><span class="service-price">$5</span></div>
+        <div class="service-card"><span class="service-name">game cheat scripts(Online games)</span><span class="service-price">$3</span></div>
+    </div>
+
+    <!-- Contact Section -->
+    <div id="CONTACT" class="section">
+        <h2>Contact Us</h2>
+        <a class="contact-btn" href="https://t.me/U_V00" target="_blank">CLICK HERE</a>
+    </div>
+</div>
+
+<script>
+function continueSite() {
+    document.getElementById("welcome").style.display = "none";
+    document.getElementById("main").style.display = "block";
+}
+
+function toggleSidebar() {
+    let s = document.getElementById("sidebar");
+    s.style.left = (s.style.left === "0px") ? "-250px" : "0px";
+}
+
+function showSection(sectionId) {
+    document.querySelectorAll('.section').forEach(sec => sec.style.display="none");
+    document.getElementById(sectionId).style.display="block";
+    toggleSidebar();
+}
+</script>
+
+</body>
+</html>
